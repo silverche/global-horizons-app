@@ -1,0 +1,453 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #004aad;
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.logo-section {
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 100px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+  padding: 100px 20px;
+}
+
+.hero h2 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background-color: #ffb703;
+  color: #000;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #ffd166;
+}
+
+/* Destinations Section */
+.destinations {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.destinations h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 15px;
+  color: #004aad;
+}
+
+.card p {
+  margin: 0 15px 20px 15px;
+}
+
+.jobs {
+  text-align: left;
+  padding: 0 15px 20px 15px;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+}
+
+.jobs h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #004aad;
+  font-size: 1em;
+}
+
+.jobs ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.jobs ul li {
+  margin-bottom: 5px;
+}
+
+/* About Section */
+.about {
+  background-color: #e9f2ff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.about h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/* Services Section */
+.services {
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.services h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #004aad;
+}
+
+.services>p {
+  color: #666;
+  margin-bottom: 40px;
+  font-size: 1.1em;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-item {
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.service-item h3 {
+  color: #004aad;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.service-item p {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Application Section */
+.apply {
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.apply h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.apply p {
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.apply-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #004aad;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-top: 10px;
+}
+
+/* Contact Section */
+.contact {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.contact a {
+  color: #004aad;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Agricultural Section */
+.agriculture {
+  padding: 80px 20px;
+  background-color: #f0f8ff;
+  text-align: center;
+}
+
+.agriculture h2 {
+  font-size: 2.5em;
+  color: #2c5e2e;
+  margin-bottom: 15px;
+}
+
+.agriculture>p {
+  margin-bottom: 40px;
+  /* Specificity for direct child paragraph */
+  font-size: 1.2em;
+  color: #555;
+}
+
+.agri-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.agri-info,
+.agri-requirements {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-top: 5px solid #2c5e2e;
+}
+
+.agri-info h3,
+.agri-requirements h3 {
+  color: #2c5e2e;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.agri-info h4,
+.agri-requirements h4 {
+  color: #004aad;
+  margin: 20px 0 10px;
+  font-size: 1.2em;
+}
+
+.agri-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.agri-list li {
+  margin-bottom: 8px;
+  font-size: 1.05em;
+}
+
+.agri-list li::before {
+  content: "🌱 ";
+  margin-right: 8px;
+}
+
+.agri-flags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.agri-flags span {
+  background: #e8f5e9;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  border: 1px solid #c8e6c9;
+}
+
+.req-box ul,
+.ben-box ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.req-box li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.req-box li::before {
+  content: "•";
+  color: #2c5e2e;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+.ben-box li {
+  margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+  background-color: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  header nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .logo {
+    height: 80px;
+  }
+}

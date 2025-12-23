@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Global Horizons</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .login-box {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .logout-btn {
+            float: right;
+            background-color: #f44336;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Login Section -->
+    <div id="login-section" class="admin-container login-box">
+        <h2>Admin Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p id="login-error" style="color: red; margin-top: 10px;"></p>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="admin-container hidden">
+        <button id="logout-btn" class="btn logout-btn">Logout</button>
+        <h2>Submitted Applications</h2>
+        <table id="applications-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Destination</th>
+                    <th>Position</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- items here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const tableBody = document.querySelector('#applications-table tbody');
+        const loginError = document.getElementById('login-error');
+
+        // Check if already logged in
+        if (localStorage.getItem('adminToken')) {
+            showDashboard();
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('adminToken', data.token);
+                    loginError.textContent = '';
+                    showDashboard();
+                } else {
+                    loginError.textContent = data.error;
+                }
+            } catch (err) {
+                loginError.textContent = 'Login failed. Server might be down.';
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            loginSection.classList.remove('hidden');
+            dashboardSection.classList.add('hidden');
+        });
+
+        async function showDashboard() {
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+            await loadApplications();
+        }
+
+        async function loadApplications() {
+            const token = localStorage.getItem('adminToken');
+            try {
+                const res = await fetch('/api/applications', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem('adminToken');
+                    location.reload();
+                    return;
+                }
+
+                const apps = await res.json();
+                tableBody.innerHTML = apps.map(app => `
+                    <tr>
+                        <td>${app.id}</td>
+                        <td>${app.name}</td>
+                        <td>${app.email}</td>
+                        <td>${app.phone}</td>
+                        <td>${app.destination}</td>
+                        <td>${app.position}</td>
+                        <td>${new Date(app.created_at).toLocaleDateString()}</td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error('Failed to load apps');
+            }
+        }
+    </script>
+</body>
+
+</html>
